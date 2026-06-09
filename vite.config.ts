@@ -1,3 +1,6 @@
 import { defineConfig } from 'vite';
 
-export default defineConfig({});
+// Pages di progetto servite da https://10littleforks.github.io/miriamos/
+export default defineConfig({
+  base: '/miriamos/',
+});
