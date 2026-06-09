@@ -26,6 +26,10 @@ let qIndex = 0;
 
 const persistFs = () => saveTree(fs.snapshot());
 
+// Registrato una volta sola: ridisegna il quadro e persiste a ogni mutazione.
+// (Evita l'accumulo di listener a ogni accensione.)
+fs.onChange(() => { view?.render(fs.list()); persistFs(); });
+
 function newId(): string {
   return 'n' + Math.random().toString(36).slice(2, 9);
 }
@@ -33,7 +37,6 @@ function newId(): string {
 function showDesktop() {
   view = new TreemapView({ audio, onSelect: () => {} });
   screen.replaceChildren(view.el);
-  fs.onChange(() => { view!.render(fs.list()); persistFs(); });
   view.render(fs.list());
 }
 

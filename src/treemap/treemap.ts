@@ -13,6 +13,7 @@ export function layout(nodes: FsNode[], rect: Rect): TreemapTile[] {
   if (nodes.length === 0) return [];
 
   const totalWeight = nodes.reduce((s, n) => s + nodeWeight(n), 0);
+  if (totalWeight === 0) return [];
   const totalArea = rect.w * rect.h;
   const items = nodes.map((n) => ({
     node: n,
